@@ -42,7 +42,7 @@ public class PaymentController {
     }
 
     @PostMapping("create")
-    public CommonResult<Payment> create(Payment payment) {
+    public CommonResult<Payment> create(@RequestBody Payment payment) {
         int insert = paymentService.insert(payment);
         if(insert>0){
             return new CommonResult(200, "insert success， serverPort：" + serverPort, insert);
