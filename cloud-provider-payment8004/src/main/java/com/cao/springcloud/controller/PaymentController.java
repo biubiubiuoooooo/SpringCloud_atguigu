@@ -3,11 +3,11 @@ package com.cao.springcloud.controller;
 import com.cao.springcloud.entities.CommonResult;
 import com.cao.springcloud.entities.Payment;
 import com.cao.springcloud.service.PaymentService;
-import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
+
 import javax.annotation.Resource;
 import java.util.List;
 
@@ -26,7 +26,6 @@ public class PaymentController {
     @Value("${server.port}")
     private String serverPort;
 
-    //    服务发现
     @Resource
    private DiscoveryClient discoveryClient;
 
@@ -50,6 +49,8 @@ public class PaymentController {
         }else {
             return new CommonResult(404,"出错啦");
         }
+
+
     }
 
     @GetMapping("/discovery")
@@ -64,4 +65,5 @@ public class PaymentController {
         }
         return this.discoveryClient;
     }
+
 }

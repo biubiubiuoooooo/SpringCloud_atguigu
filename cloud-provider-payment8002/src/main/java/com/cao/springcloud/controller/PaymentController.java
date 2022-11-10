@@ -3,13 +3,13 @@ package com.cao.springcloud.controller;
 import com.cao.springcloud.entities.CommonResult;
 import com.cao.springcloud.entities.Payment;
 import com.cao.springcloud.service.PaymentService;
-import org.slf4j.Logger;
+import com.cao.springcloud.service.PaymentService;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cloud.client.ServiceInstance;
-import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
+
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * (Payment)表控制层
@@ -27,8 +27,7 @@ public class PaymentController {
     private String serverPort;
 
     //    服务发现
-    @Resource
-   private DiscoveryClient discoveryClient;
+//   private DiscoveryClient discoveryClient;
 
     /**
      * 通过主键查询单条数据
@@ -50,18 +49,9 @@ public class PaymentController {
         }else {
             return new CommonResult(404,"出错啦");
         }
+
+
     }
 
-    @GetMapping("/discovery")
-    public Object discovery(){
-        List<String> services = discoveryClient.getServices();
-        for (String service : services) {
-            System.out.println("**********"+service);
-        }
-        List<ServiceInstance> instances = discoveryClient.getInstances("cloud-payment-service");
-        for (ServiceInstance instance : instances) {
-            System.out.println(instance.getServiceId()+"\t"+instance.getHost()+"\t"+instance.getPort()+"\t"+instance.getUri());
-        }
-        return this.discoveryClient;
-    }
+
 }
