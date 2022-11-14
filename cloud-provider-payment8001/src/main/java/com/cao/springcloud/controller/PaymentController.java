@@ -42,6 +42,11 @@ public class PaymentController {
         return new CommonResult<Payment>(200, "select success， serverPort：" + serverPort, payment);
     }
 
+    @GetMapping("/lb")
+    public String lb(){
+        return serverPort;
+    }
+
     @PostMapping("create")
     public CommonResult<Payment> create(@RequestBody Payment payment) {
         int insert = paymentService.insert(payment);
